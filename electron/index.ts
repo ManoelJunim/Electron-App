@@ -33,6 +33,9 @@ const createWindow = (): void => {
     ipcMain.handle("files/list", (ev, dir: string) => {
       return FilesController.listFiles(dir);
     });
+    ipcMain.handle("files/list", (ev, dir: string) => {
+      return FilesController.readTextFile(dir);
+    });
   });
 };
 

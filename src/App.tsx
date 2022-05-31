@@ -1,8 +1,13 @@
 import React from "react";
+import { SessionProvider } from "./contexts";
 import { Routes } from "./routes";
 
 const App = () => {
-  return <Routes />;
+  return (
+    <SessionProvider>
+      <Routes />
+    </SessionProvider>
+  );
 };
 
 export { App };
