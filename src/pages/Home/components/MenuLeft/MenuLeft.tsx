@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, Text, Col, Row, Spacer, css } from "@nextui-org/react";
+import { Button, Text, Col, Row, Spacer } from "@nextui-org/react";
 import {
   Computer,
   Download,
@@ -30,12 +30,12 @@ const MenuLeft = () => {
   const dirVideos = "C:\\Users\\Manoel Farias\\Videos";
 
   return (
-    <Row css={{ h: "100%", backgroundColor: "#49444B" }}>
+    <Row css={{ h: "100%", backgroundColor: "#32383D" }}>
       <Col css={{ h: "100%" }}>
         <Spacer y={2} />
         <Row justify="center">
           <Text b size={12} css={{ color: "#8D888F" }}>
-            Favoritos
+            Favorites
           </Text>
         </Row>
 
@@ -44,7 +44,7 @@ const MenuLeft = () => {
             color="warning"
             light
             size={"sm"}
-            icon={<Computer />}
+            icon={<Computer fontSize={"small"} />}
             onPress={() => {
               clicked(dirDestop);
             }}
@@ -60,7 +60,7 @@ const MenuLeft = () => {
             }}
             light
             size={"sm"}
-            icon={<Topic />}
+            icon={<Topic fontSize={"small"} />}
             css={{
               "&:hover": {
                 background: "#8D888F",
@@ -78,7 +78,7 @@ const MenuLeft = () => {
             }}
             light
             size={"sm"}
-            icon={<Download />}
+            icon={<Download fontSize={"small"} />}
             css={{
               "&:hover": {
                 background: "#8D888F",
@@ -96,7 +96,7 @@ const MenuLeft = () => {
             }}
             light
             size={"sm"}
-            icon={<Image />}
+            icon={<Image fontSize={"small"} />}
             css={{
               "&:hover": {
                 background: "#8D888F",
@@ -114,7 +114,7 @@ const MenuLeft = () => {
             }}
             light
             size={"sm"}
-            icon={<MusicNote />}
+            icon={<MusicNote fontSize={"small"} />}
             css={{
               "&:hover": {
                 background: "#8D888F",
@@ -132,7 +132,7 @@ const MenuLeft = () => {
             }}
             light
             size={"sm"}
-            icon={<VideoCameraBack />}
+            icon={<VideoCameraBack fontSize={"small"} />}
             css={{
               "&:hover": {
                 background: "#8D888F",
@@ -143,18 +143,6 @@ const MenuLeft = () => {
           </Button>
         </Row>
         <Spacer y={1} />
-
-        <Spacer y={10} />
-        <Row justify="center">
-          <Text b size={12} css={{ color: "#8D888F" }}>
-            Electron
-          </Text>
-        </Row>
-        <Row justify="center">
-          <Text small color="warning">
-            NEXT UI | DOC-9 🚀
-          </Text>
-        </Row>
       </Col>
     </Row>
   );

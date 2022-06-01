@@ -16,7 +16,7 @@ if (require("electron-squirrel-startup")) {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 600,
+    height: 700,
     width: 900,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
@@ -29,12 +29,11 @@ const createWindow = (): void => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
+  mainWindow.removeMenu();
+
   mainWindow.once("ready-to-show", () => {
     ipcMain.handle("files/list", (ev, dir: string) => {
       return FilesController.listFiles(dir);
-    });
-    ipcMain.handle("files/list", (ev, dir: string) => {
-      return FilesController.readTextFile(dir);
     });
   });
 };
