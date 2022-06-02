@@ -1,5 +1,6 @@
 // Preload (Isolated World)
 import { contextBridge } from "electron";
-import { API } from "./bridge";
+import { API, ExecFileOpen } from "./bridge";
 
 contextBridge.exposeInMainWorld("api", API);
+contextBridge.exposeInMainWorld("openFile", ExecFileOpen);

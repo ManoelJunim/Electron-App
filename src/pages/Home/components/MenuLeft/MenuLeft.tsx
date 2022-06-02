@@ -11,13 +11,15 @@ import {
 
 import { SessionContext } from "../../../../contexts";
 import * as S from "./styles";
+import { Typography } from "@mui/material";
 
 const MenuLeft = () => {
-  const { setFiles, setLoading } = useContext(SessionContext);
+  const { setFiles, setLoading, setDirFile } = useContext(SessionContext);
 
   const clicked = async (dir: string) => {
     setLoading(true);
     const resp = await window.api.listFiles(dir);
+    setDirFile(dir);
     setFiles(resp);
     setLoading(false);
   };
@@ -30,15 +32,14 @@ const MenuLeft = () => {
   const dirVideos = "C:\\Users\\Manoel Farias\\Videos";
 
   return (
-    <Row css={{ h: "100%", backgroundColor: "#32383D" }}>
-      <Col css={{ h: "100%" }}>
+    <Row css={{ minHeight: "100vh", backgroundColor: "#32383D" }}>
+      <Col>
         <Spacer y={2} />
         <Row justify="center">
-          <Text b size={12} css={{ color: "#8D888F" }}>
+          <Typography variant="body2" color="#8D888F">
             Favorites
-          </Text>
+          </Typography>
         </Row>
-
         <Row justify="flex-start">
           <S.ButtonMenu
             color="warning"
@@ -49,7 +50,9 @@ const MenuLeft = () => {
               clicked(dirDestop);
             }}
           >
-            <Text css={{ color: "White" }}>Desktop</Text>
+            <Typography variant="body2" color="#fff">
+              Desktop
+            </Typography>
           </S.ButtonMenu>
         </Row>
         <Row justify="flex-start">
@@ -142,7 +145,6 @@ const MenuLeft = () => {
             <Text css={{ color: "White" }}>Videos</Text>
           </Button>
         </Row>
-        <Spacer y={1} />
       </Col>
     </Row>
   );

@@ -16,7 +16,7 @@ if (require("electron-squirrel-startup")) {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 700,
+    height: 610,
     width: 900,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
@@ -27,20 +27,25 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.removeMenu();
+
+  mainWindow.setTitle("Explorer");
 
   mainWindow.once("ready-to-show", () => {
     ipcMain.handle("files/list", (ev, dir: string) => {
       return FilesController.listFiles(dir);
     });
   });
+
+  mainWindow.once("ready-to-show", () => {
+    ipcMain.on("open/files", (ev, dir: string, fileName: string) => {
+      FilesController.openFile(dir, fileName);
+    });
+  });
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
 
 // Quit when all windows are closed, except on macOS. There, it's common

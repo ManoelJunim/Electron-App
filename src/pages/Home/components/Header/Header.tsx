@@ -1,29 +1,40 @@
 import React from "react";
-import { Button, Col, Row, Text } from "@nextui-org/react";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { Col, Grid, Input, Row, Switch } from "@nextui-org/react";
+import {
+  ArrowBackIos,
+  ArrowForwardIos,
+  DarkMode,
+  GridView,
+  LightMode,
+  Search,
+} from "@mui/icons-material";
 
 import * as S from "./styles";
 
 const Header = () => {
   return (
-    <Row css={{ backgroundColor: "#202529" }}>
-      <Col>
-        <Row align="center" justify="flex-start">
+    <Grid.Container css={{ backgroundColor: "#202529" }}>
+      <Grid.Container xs={6}>
+        <Grid>
           <S.ButtonNavi light auto icon={<ArrowBackIos />} color="warning" />
+        </Grid>
+        <Grid>
           <S.ButtonNavi light auto icon={<ArrowForwardIos />} color="warning" />
-        </Row>
-      </Col>
-      <Col>
-        <Row align="center" justify="flex-end" css={{ marginRight: "10px" }}>
-          <Text h1 size={30} color="warning" weight="light">
-            |
-          </Text>
-          <Text size={15} color="#FFFFFF" weight="light">
-            Explorer
-          </Text>
-        </Row>
-      </Col>
-    </Row>
+        </Grid>
+      </Grid.Container>
+      <Grid.Container xs={6} justify="flex-end" alignItems="center" gap={1}>
+        <Grid>
+          <Input
+            shadow={false}
+            size="xs"
+            placeholder="Search"
+            color="warning"
+            status="default"
+            contentRight={<Search fontSize="inherit" />}
+          />
+        </Grid>
+      </Grid.Container>
+    </Grid.Container>
   );
 };
 

@@ -8,14 +8,6 @@ const SessionProvider = ({ children }: { children?: React.ReactNode }) => {
   const [loading, setLoading] = React.useState<boolean>(true);
   const [dirFile, setDirFile] = useState<string>("");
 
-  // useEffect (  async () => {
-  //       setLoading(true);
-  //       const resp = await window.api.listFiles(dirFile);
-  //       setFiles(resp);
-  //       setLoading(false);
-  //   },[dirFile]
-  // );
-
   return (
     <SessionContext.Provider
       value={{
@@ -23,6 +15,8 @@ const SessionProvider = ({ children }: { children?: React.ReactNode }) => {
         setFiles,
         loading,
         setLoading,
+        dirFile,
+        setDirFile,
       }}
     >
       {children}

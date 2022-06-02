@@ -5,4 +5,9 @@ const API = {
     await ipcRenderer.invoke("files/list", dir),
 };
 
-export { API };
+const ExecFileOpen = {
+  openFile: (dir: string, fileName: string): void =>
+    ipcRenderer.send("open/files", dir, fileName),
+};
+
+export { API, ExecFileOpen };

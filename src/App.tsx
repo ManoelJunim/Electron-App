@@ -1,7 +1,8 @@
 import React from "react";
-import { SessionProvider } from "./contexts";
+
 import { Routes } from "./routes";
 import { globalStyles } from "./styles";
+import { SessionProvider } from "./contexts";
 
 const App = () => {
   globalStyles();
