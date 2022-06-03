@@ -14,15 +14,7 @@ import * as S from "./styles";
 import { Typography } from "@mui/material";
 
 const MenuLeft = () => {
-  const { setFiles, setLoading, setDirFile } = useContext(SessionContext);
-
-  const clicked = async (dir: string) => {
-    setLoading(true);
-    const resp = await window.api.listFiles(dir);
-    setDirFile(dir);
-    setFiles(resp);
-    setLoading(false);
-  };
+  const { setCurrentDir } = useContext(SessionContext);
 
   const dirDestop = "C:\\Users\\Manoel Farias\\Desktop";
   const dirDocuments = "C:\\Users\\Manoel Farias\\Documents";
@@ -47,7 +39,7 @@ const MenuLeft = () => {
             size={"sm"}
             icon={<Computer fontSize={"small"} />}
             onPress={() => {
-              clicked(dirDestop);
+              setCurrentDir(dirDestop);
             }}
           >
             <Typography variant="body2" color="#fff">
@@ -59,7 +51,7 @@ const MenuLeft = () => {
           <Button
             color="warning"
             onPress={() => {
-              clicked(dirDocuments);
+              setCurrentDir(dirDocuments);
             }}
             light
             size={"sm"}
@@ -77,7 +69,7 @@ const MenuLeft = () => {
           <Button
             color="warning"
             onPress={() => {
-              clicked(dirDownloads);
+              setCurrentDir(dirDownloads);
             }}
             light
             size={"sm"}
@@ -95,7 +87,7 @@ const MenuLeft = () => {
           <Button
             color="warning"
             onPress={() => {
-              clicked(dirImages);
+              setCurrentDir(dirImages);
             }}
             light
             size={"sm"}
@@ -113,7 +105,7 @@ const MenuLeft = () => {
           <Button
             color="warning"
             onPress={() => {
-              clicked(dirMusics);
+              setCurrentDir(dirMusics);
             }}
             light
             size={"sm"}
@@ -131,7 +123,7 @@ const MenuLeft = () => {
           <Button
             color="warning"
             onPress={() => {
-              clicked(dirVideos);
+              setCurrentDir(dirVideos);
             }}
             light
             size={"sm"}

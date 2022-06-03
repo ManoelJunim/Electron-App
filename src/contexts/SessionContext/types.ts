@@ -3,6 +3,7 @@ export interface ISessionContext {
   setFiles: React.Dispatch<React.SetStateAction<string[]>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  dirFile: string;
-  setDirFile: React.Dispatch<React.SetStateAction<string>>;
+  currentDir: string;
+  setCurrentDir: React.Dispatch<React.SetStateAction<string>>;
+  setNameFolder: React.Dispatch<React.SetStateAction<string>>;
 }

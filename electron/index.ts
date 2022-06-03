@@ -37,11 +37,13 @@ const createWindow = (): void => {
     ipcMain.handle("files/list", (ev, dir: string) => {
       return FilesController.listFiles(dir);
     });
-  });
 
-  mainWindow.once("ready-to-show", () => {
     ipcMain.on("open/files", (ev, dir: string, fileName: string) => {
       FilesController.openFile(dir, fileName);
+    });
+
+    ipcMain.handle("folder/Dir", (ev, dir: string) => {
+      return FilesController.openFolder(dir);
     });
   });
 };

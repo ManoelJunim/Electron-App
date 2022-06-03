@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import { Col, Grid, Loading, Row, Spacer } from "@nextui-org/react";
+import { Col, Grid, Loading, Spacer } from "@nextui-org/react";
 import {
   GrDocumentTxt,
   GrDocumentConfig,
@@ -19,10 +19,15 @@ import { SessionContext } from "../../../../contexts";
 import * as S from "./styles";
 
 const Desktop = () => {
-  const { files, loading, dirFile } = useContext(SessionContext);
+  const { files, loading, currentDir, setNameFolder } =
+    useContext(SessionContext);
 
   const openFiles = (fileName: string) => {
-    window.openFile.openFile(dirFile, fileName);
+    if (fileName.includes(".")) {
+      window.openFile.openFile(currentDir, fileName);
+    } else {
+      setNameFolder(fileName);
+    }
   };
 
   const getIconType = (typeFile: string) => {
@@ -102,7 +107,6 @@ const Desktop = () => {
                     css={{
                       color: "warning",
                       cursor: "pointer",
-
                       "&:hover": {
                         background: "#8D888F",
                       },

@@ -10,4 +10,9 @@ const ExecFileOpen = {
     ipcRenderer.send("open/files", dir, fileName),
 };
 
-export { API, ExecFileOpen };
+const ExecFileFolder = {
+  openFolder: async (dir: string): Promise<string> =>
+    await ipcRenderer.invoke("folder/Dir", dir),
+};
+
+export { API, ExecFileOpen, ExecFileFolder };

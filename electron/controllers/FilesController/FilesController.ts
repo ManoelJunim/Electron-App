@@ -8,6 +8,10 @@ class FilesController {
   static openFile(dir: string, fileName: string) {
     execSync(`"${dir}\\${fileName}"`);
   }
+
+  static openFolder(dir: string) {
+    return execSync(`cd ${dir}`);
+  }
 }
 
 export { FilesController };
