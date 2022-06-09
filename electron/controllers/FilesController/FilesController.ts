@@ -12,6 +12,18 @@ class FilesController {
   static openFolder(dir: string) {
     return execSync(`cd ${dir}`);
   }
+
+  static creatFolder(dir: string) {
+    return execSync(`mkdir "${dir}"`);
+  }
+
+  static deleteFile(dir: string) {
+    return execSync(`Del "${dir}"`);
+  }
+
+  static deleteFolder(dir: string) {
+    return execSync(`rmdir "${dir}"`);
+  }
 }
 
 export { FilesController };

@@ -1,55 +1,90 @@
-import React, { useContext } from "react";
-import { Grid, Input } from "@nextui-org/react";
-import { ArrowBackIos, ArrowForwardIos, Search } from "@mui/icons-material";
+import React, { useContext, useState } from "react";
+import { Button, Grid, Input, Text, Modal } from "@nextui-org/react";
+import { Search } from "@mui/icons-material";
+import { Typography } from "@mui/material";
+import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 
 import * as S from "./styles";
 import { SessionContext } from "../../../../contexts";
-import { Typography } from "@mui/material";
 
 const Header = () => {
-  const { currentDir, setCurrentDir } = useContext(SessionContext);
+  const { currentDir } = useContext(SessionContext);
+  const [visible, setVisible] = useState(false);
+  const [folder, setFolder] = useState<string>("");
+  const handler = () => setVisible(true);
 
-  const getPreviousDir = () => {
-    // removendo o ultimo elemento da lista
-    setCurrentDir(currentDir.split("\\").slice(0, -1).join("\\"));
+  const closeHandler = () => {
+    setVisible(false);
+  };
+
+  const setNameFolder = (name: string) => {
+    window.creatFolder.creatFolder(`${currentDir}\\${name}`);
+    setVisible(false);
   };
 
   return (
-    <Grid.Container css={{ backgroundColor: "#202529" }}>
-      <Grid.Container xs={8} alignItems="center">
-        <Grid>
-          <S.ButtonNavi
-            onPress={() => {
-              getPreviousDir();
-            }}
-            light
-            auto
-            icon={<ArrowBackIos />}
-            color="warning"
-          />
-        </Grid>
-        <Grid>
-          <S.ButtonNavi light auto icon={<ArrowForwardIos />} color="warning" />
-        </Grid>
-        <Grid>
-          <Typography variant="body1" color="#fff" fontSize={13}>
-            {currentDir}
-          </Typography>
-        </Grid>
-      </Grid.Container>
-      <Grid.Container xs={4} justify="flex-end" alignItems="center" gap={1}>
-        <Grid>
+    <>
+      <Modal
+        closeButton
+        aria-labelledby="modal-title"
+        open={visible}
+        onClose={closeHandler}
+        css={{ bg: "#32383D" }}
+      >
+        <Modal.Body>
           <Input
-            shadow={false}
-            size="xs"
-            placeholder="Search"
-            color="warning"
-            status="default"
-            contentRight={<Search fontSize="inherit" />}
+            onChange={(event) => {
+              setFolder(event.target.value);
+            }}
+            clearable
+            placeholder="nome da pasta"
+            css={{ padding: 5 }}
           />
-        </Grid>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            color="warning"
+            size="xs"
+            onPress={() => {
+              setNameFolder(folder);
+            }}
+          >
+            <Text b>Criar</Text>
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Grid.Container css={{ backgroundColor: "#202529" }}>
+        <Grid.Container xs={7} alignItems="center" justify="flex-start" gap={2}>
+          <Grid>
+            <Typography variant="body1" color="#fff" fontSize={14}>
+              {currentDir}
+            </Typography>
+          </Grid>
+        </Grid.Container>
+        <Grid.Container xs={5} justify="flex-end" alignItems="center" gap={1}>
+          <Grid>
+            <S.ButtonNavi
+              onPress={handler}
+              light
+              auto
+              icon={<CreateNewFolderIcon />}
+              color="warning"
+            />
+          </Grid>
+          <Grid>
+            <Input
+              shadow={false}
+              size="xs"
+              placeholder="Search"
+              color="warning"
+              status="default"
+              contentRight={<Search fontSize="inherit" />}
+            />
+          </Grid>
+        </Grid.Container>
       </Grid.Container>
-    </Grid.Container>
+    </>
   );
 };
 

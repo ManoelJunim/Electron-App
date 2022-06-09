@@ -13,6 +13,7 @@ import {
   GrDocumentImage,
   GrFolder,
 } from "react-icons/gr";
+import { AiOutlineDelete } from "react-icons/ai";
 import { Divider, Typography } from "@mui/material";
 
 import { SessionContext } from "../../../../contexts";
@@ -27,6 +28,14 @@ const Desktop = () => {
       window.openFile.openFile(currentDir, fileName);
     } else {
       setNameFolder(fileName);
+    }
+  };
+
+  const checkTypeDelete = (name: string) => {
+    if (name.includes(".")) {
+      window.openFile.deleteFile(`${currentDir}\\${name}`);
+    } else {
+      window.creatFolder.deleteFolder(`${currentDir}\\${name}`);
     }
   };
 
@@ -85,14 +94,12 @@ const Desktop = () => {
             <Grid.Container gap={1}>
               <Grid xs={8} alignItems="center" justify="flex-start">
                 <Typography variant="body2" color="#fff">
-                  {" "}
-                  Nome{" "}
+                  Nome
                 </Typography>
               </Grid>
               <Grid xs={4} alignItems="center" justify="center">
                 <Typography variant="body2" color="#fff">
-                  {" "}
-                  Data{" "}
+                  Data
                 </Typography>
               </Grid>
             </Grid.Container>
@@ -111,21 +118,20 @@ const Desktop = () => {
                         background: "#8D888F",
                       },
                     }}
+                    onDoubleClick={() => {
+                      openFiles(
+                        `${f
+                          .trim()
+                          .split(" ")
+                          .filter((item) => item !== "")
+                          .slice(3)
+                          .join(" ")}`
+                      );
+                    }}
                   >
                     <Grid.Container gap={0.5} xs={8}>
                       <Grid>{getIconType(`${f.trim().split(".").pop()}`)}</Grid>
-                      <Grid
-                        onClick={() => {
-                          openFiles(
-                            `${f
-                              .trim()
-                              .split(" ")
-                              .filter((item) => item !== "")
-                              .slice(3)
-                              .join(" ")}`
-                          );
-                        }}
-                      >
+                      <Grid>
                         <Typography variant="body2" color="white">
                           {f
                             .trim()
@@ -146,6 +152,22 @@ const Desktop = () => {
                         <Typography variant="body2" color="white">
                           {f.trim().split(" ")[2]}
                         </Typography>
+                      </Grid>
+                      <Grid>
+                        <AiOutlineDelete
+                          size={20}
+                          style={{ color: "#fff" }}
+                          onClick={() =>
+                            checkTypeDelete(
+                              `${f
+                                .trim()
+                                .split(" ")
+                                .filter((item) => item !== "")
+                                .slice(3)
+                                .join(" ")}`
+                            )
+                          }
+                        />
                       </Grid>
                     </Grid.Container>
                   </Grid.Container>

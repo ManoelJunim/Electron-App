@@ -5,9 +5,13 @@ const API = {
     await ipcRenderer.invoke("files/list", dir),
 };
 
-const ExecFileOpen = {
+const ExecFile = {
   openFile: (dir: string, fileName: string): void =>
     ipcRenderer.send("open/files", dir, fileName),
+
+  deleteFile: (dir: string): void => {
+    ipcRenderer.send("delete/file", dir);
+  },
 };
 
 const ExecFileFolder = {
@@ -15,4 +19,10 @@ const ExecFileFolder = {
     await ipcRenderer.invoke("folder/Dir", dir),
 };
 
-export { API, ExecFileOpen, ExecFileFolder };
+const ExecFolder = {
+  creatFolder: (dir: string): void => ipcRenderer.send("creat/folder", dir),
+
+  deleteFolder: (dir: string): void => ipcRenderer.send("delete/folder", dir),
+};
+
+export { API, ExecFile, ExecFileFolder, ExecFolder };

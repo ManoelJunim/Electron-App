@@ -1,9 +1,10 @@
-import { API, ExecFileFolder, ExecFileOpen } from "../../bridge/bridge";
+import { API, ExecFolder, ExecFileFolder, ExecFile } from "../../bridge/bridge";
 
 declare global {
   interface Window {
     api: typeof API;
-    openFile: typeof ExecFileOpen;
+    openFile: typeof ExecFile;
     openFolder: typeof ExecFileFolder;
+    creatFolder: typeof ExecFolder;
   }
 }

@@ -1,4 +1,4 @@
-import { styled, Button } from "@nextui-org/react";
+import { styled, Button, Grid } from "@nextui-org/react";
 
 const ButtonNavi = styled(Button, {
   "&:hover": {
@@ -6,4 +6,12 @@ const ButtonNavi = styled(Button, {
   },
 });
 
-export { ButtonNavi };
+const Container = styled(Grid, {
+  svg: {
+    path: {
+      stroke: "#BCBCBC",
+    },
+  },
+});
+
+export { ButtonNavi, Container };

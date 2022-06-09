@@ -16,8 +16,10 @@ if (require("electron-squirrel-startup")) {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 610,
-    width: 900,
+    minHeight: 500,
+    minWidth: 500,
+    height: 775,
+    width: 1000,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -42,8 +44,20 @@ const createWindow = (): void => {
       FilesController.openFile(dir, fileName);
     });
 
+    ipcMain.on("creat/folder", (ev, dir: string) => {
+      FilesController.creatFolder(dir);
+    });
+
     ipcMain.handle("folder/Dir", (ev, dir: string) => {
       return FilesController.openFolder(dir);
+    });
+
+    ipcMain.on("delete/file", (ev, dir: string) => {
+      FilesController.deleteFile(dir);
+    });
+
+    ipcMain.on("delete/folder", (ev, dir: string) => {
+      FilesController.deleteFolder(dir);
     });
   });
 };
